@@ -1,15 +1,18 @@
 #############################################
-#	Login and Register Program          #
-#		Made By Harvey		    #
-#                                           #
+#	 Login and Register Program         #
+#             Made By Harvey                #
+#					    #
 #############################################
 import replit
 from getpass import getpass
 from colorama import Fore as a
+import hashlib
+import os
 
 userTable={}
 userTable['user'] = 'password'
 attempts=0
+salt = os.urandom(32)
 while True:
 
 	def Register():
@@ -17,8 +20,11 @@ while True:
 		password = getpass("Password: ")
 		cnfrm = getpass("Re-Enter Password: ")
 		if password==cnfrm:
-			userTable[user] = password
 			replit.clear()
+			key = hashlib.pbkdf2_hmac('sha256', password.encode('utf-8'), salt, 100000)
+			storage=salt+key
+			userTable[user] = storage
+			print(userTable)
 			print(a.GREEN+"Successfully Registered!\n"+a.WHITE)
 		else:
 			replit.clear()
@@ -27,8 +33,10 @@ while True:
 	def Login():
 		user=input("Username: ")
 		password = getpass("Password: ")
+		key = hashlib.pbkdf2_hmac('sha256', password.encode('utf-8'), salt, 100000)
+		storage = salt + key
 		if user in userTable:
-			if password == userTable[user]:
+			if storage == userTable[user]:
 				replit.clear()
 				print(a.GREEN+"You Have Logged In Successfully!\n"+a.WHITE)
 			else:
@@ -79,3 +87,7 @@ while True:
 		importFile()
 	elif q == "view":
 		View()
+				
+
+	
+	
