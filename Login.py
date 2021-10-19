@@ -1,7 +1,7 @@
 #############################################
-#				Login and Register Program          #
-#							Made By Harvey								#
-#																						#
+#	Login and Register Program          #
+#		Made By Harvey		    #
+#                                           #
 #############################################
 import replit
 from getpass import getpass
