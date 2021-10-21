@@ -13,7 +13,7 @@ import hashlib
 import os
 import secrets
 
-# Outside While Variables
+# Global Variables
 
 userTable = {}
 userTable['user'] = 'password'
